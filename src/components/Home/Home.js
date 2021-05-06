@@ -25,14 +25,23 @@ const Home = () => {
       setInvoices(data);
       //if there are filters, apply them
     } else {
-      const filteredData = data.filter((invoice) => invoice.status === status);
+      const filteredData = invoices.filter(
+        (invoice) => invoice.status === status
+      );
       setInvoices(filteredData);
     }
   };
 
+  const addInvoice = (invoice) => {
+    setData([...data, invoice]);
+    setInvoices([...invoices, invoice]);
+  };
+
+  console.log(invoices);
+
   return (
     <div>
-      <Form />
+      <Form addInvoice={addInvoice} />
       <button onClick={() => filterData("all")}>All Invoices</button>
       <button onClick={() => filterData("paid")}>Paid</button>
       <button onClick={() => filterData("pending")}>Pending</button>
